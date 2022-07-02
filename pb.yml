@@ -1,0 +1,12 @@
+---
+- name: play1
+  hosts: localhost
+  gather_facts: false
+  vars_files: 
+    - varfile1.yml
+    - varfile2.yml
+  tasks: 
+    - debug:
+        msg: "var in varfile1: {{var1}}"
+    - debug:
+        msg: "var in varfile2: {{var2}}"

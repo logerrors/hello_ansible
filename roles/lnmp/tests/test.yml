@@ -1,0 +1,26 @@
+---
+- hosts: dev
+  gather_facts: false
+  roles:
+    - ../../lnmp
+
+- name: test nginx
+  hosts: dev
+  gather_facts: false
+  vars_files:
+    - ../../lnmp/vars/main.yml
+  tasks:
+    - name: test web pages
+      uri:
+        url: "http://{{item.value.server_name}}:{{item.value.listen}}"
+      loop: "{{vhosts|dict2items}}"
+      run_once: true
+      delegate_to: localhost
+      tags: test
+    - name: test pnp pages
+      uri:
+        url: "http://{{item.value.server_name}}:{{item.value.listen}}/index.php"
+      loop: "{{vhosts|dict2items}}"
+      run_once: true
+      delegate_to: localhost
+      tags: test

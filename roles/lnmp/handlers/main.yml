@@ -1,0 +1,7 @@
+---
+# handlers file for lnmp
+- name: reload nginx
+  service:
+    name: nginx
+    state: reloaded
+    enabled: true

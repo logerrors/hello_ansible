@@ -1,0 +1,21 @@
+node1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 
+node2 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2200 
+node3 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2201 
+
+[all:vars]
+ansible_ssh_user=vagrant
+ansible_ssh_pass=vagrant
+
+[nginx]
+node1
+
+[php]
+node2
+
+[mysql]
+node3
+
+[dev:children]
+nginx
+php
+mysql
